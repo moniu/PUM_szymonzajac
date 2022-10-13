@@ -9,9 +9,11 @@ var refreshInterval = setInterval(() => {
     let color = Math.abs(time%510-255);
     ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
 
-    ctx.arc(400, 300, 100, 0, Math.PI*2);
+    let position = 450 + 150*Math.sin(time/(24*Math.PI));
+
+    ctx.arc(400, position, 100, 0, Math.PI*2);
     ctx.fill();
 
     time++;
 
-}, 10)
+}, 20)
