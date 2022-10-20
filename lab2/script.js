@@ -14,6 +14,12 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#83591B"
     ctx.fillRect(400,500-firstStepFill, 300, firstStepFill);
 
+    secondStepFill = Math.max(0, Math.min(50, time-200));
+    ctx.fillStyle = "#654008"
+    ctx.fillRect(450,450-secondStepFill, 250, secondStepFill);
+
+    
+
     // let color = Math.abs(time%510-255);
     // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
 
