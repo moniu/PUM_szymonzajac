@@ -26,6 +26,18 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#735118"
     ctx.fillRect(550, 350-fourthStepFill, 150, fourthStepFill);
 
+    fifthStepFill = Math.max(0, Math.min(50, time-500));
+    ctx.fillStyle = "#52370F"
+    ctx.fillRect(600, 300-fifthStepFill, 100, fifthStepFill);
+
+    ballStepFill = Math.max(0, Math.min(Math.PI*2, (time-600)/10));
+    ctx.fillStyle = "#C33";
+    ctx.beginPath();
+    ctx.arc(650, 225, 25, 0, ballStepFill);
+    ctx.fill();
+
+
+
     // let color = Math.abs(time%510-255);
     // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
 
@@ -35,6 +47,6 @@ var refreshInterval = setInterval(() => {
     // ctx.arc(400, position, 100, 0, Math.PI*2);
     // ctx.fill();
 
-    time++;
+    time+=5;
 
 }, 20)
