@@ -18,6 +18,10 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#654008"
     ctx.fillRect(450,450-secondStepFill, 250, secondStepFill);
 
+    thirdStepFill = Math.max(0, Math.min(50, time-300));
+    ctx.fillStyle = "#926929"
+    ctx.fillRect(500,400-thirdStepFill, 200, thirdStepFill);
+
     
 
     // let color = Math.abs(time%510-255);
