@@ -8,7 +8,7 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(0,0,800,600);
 
     ctx.fillStyle = "#2D831B";
-    ctx.fillRect(0,400,800,200);
+    ctx.fillRect(0,500,800,100);
 
     // let color = Math.abs(time%510-255);
     // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
