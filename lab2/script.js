@@ -31,9 +31,11 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(600, 300-fifthStepFill, 100, fifthStepFill);
 
     ballStepFill = Math.max(0, Math.min(Math.PI*2, (time-600)/10));
+    ballXPos = 650 - Math.max(0, Math.min(500, time - 800));
+    ballYPos = 900 - Math.max(425, Math.min(675, ballXPos + 100 * Math.abs(Math.sin(ballXPos/Math.PI/12))));
     ctx.fillStyle = "#C33";
     ctx.beginPath();
-    ctx.arc(650, 225, 25, 0, ballStepFill);
+    ctx.arc(ballXPos, ballYPos, 25, 0, ballStepFill);
     ctx.fill();
 
 
