@@ -12,17 +12,19 @@ var refreshInterval = setInterval(() => {
 
     firstStepFill = Math.max(0, Math.min(50, time-100));
     ctx.fillStyle = "#83591B"
-    ctx.fillRect(400,500-firstStepFill, 300, firstStepFill);
+    ctx.fillRect(400, 500-firstStepFill, 300, firstStepFill);
 
     secondStepFill = Math.max(0, Math.min(50, time-200));
     ctx.fillStyle = "#654008"
-    ctx.fillRect(450,450-secondStepFill, 250, secondStepFill);
+    ctx.fillRect(450, 450-secondStepFill, 250, secondStepFill);
 
     thirdStepFill = Math.max(0, Math.min(50, time-300));
     ctx.fillStyle = "#926929"
-    ctx.fillRect(500,400-thirdStepFill, 200, thirdStepFill);
+    ctx.fillRect(500, 400-thirdStepFill, 200, thirdStepFill);
 
-    
+    fourthStepFill = Math.max(0, Math.min(50, time-400));
+    ctx.fillStyle = "#735118"
+    ctx.fillRect(550, 350-fourthStepFill, 150, fourthStepFill);
 
     // let color = Math.abs(time%510-255);
     // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
