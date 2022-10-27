@@ -37,18 +37,18 @@ var refreshInterval = setInterval(() => {
         //shadow
         ctx.fillStyle = "#101010";
         ctx.beginPath()
-        ctx.arc(ball.x+2, ball.y+2, ballsSize, 0, Math.PI*2);
+        ctx.arc(ball.x + 2, ball.y + 2, ballsSize, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.fillStyle = "#1558D1";
         ctx.beginPath()
-        ctx.arc(ball.x, ball.y, ballsSize, 0, Math.PI*2);
+        ctx.arc(ball.x, ball.y, ballsSize, 0, Math.PI * 2);
         ctx.fill();
 
         bullets.forEach(bullet => {
             if (distance(ball.x, ball.y, bullet.x, bullet.y) < ballsSize ) {
                 bullets = bullets.filter(b => b != bullet);
-                balls = balls.filter(b => b!=ball);
+                balls = balls.filter(b => b != ball);
                 ballsCount--;
                 killedBalls++;
                 return;
@@ -57,10 +57,10 @@ var refreshInterval = setInterval(() => {
     });
 
     bullets.forEach(bullet => {
-        bullet.y-=bulletSpeed;
+        bullet.y -= bulletSpeed;
 
         if (bullet.y < 0) {
-            bullets = bullets.filter(b => b!=bullet);
+            bullets = bullets.filter(b => b != bullet);
             return;
         }
 
@@ -77,7 +77,7 @@ var refreshInterval = setInterval(() => {
         ballsTimer++;
     }
 
-    time+=5;
+    time += 5;
 
 }, 20)
 
@@ -103,5 +103,5 @@ function handleKey(event) {
 }
 
 function distance(x1, y1, x2, y2) {
-    return Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
