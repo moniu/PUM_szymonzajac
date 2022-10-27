@@ -4,6 +4,7 @@ let time = 0;
 let bullets = [];
 let balls = [];
 let playerPos = 400;
+window.addEventListener("onkeypress", handleKey);
 
 var refreshInterval = setInterval(() => {
     
@@ -12,7 +13,6 @@ var refreshInterval = setInterval(() => {
 
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPos - 25, 525, 50, 50);
-
 
 
     // let color = Math.abs(time%510-255);
@@ -30,5 +30,9 @@ var refreshInterval = setInterval(() => {
 
 function createBullet(startX) {
     return {x:startX, y:525};
+}
+
+function handleKey() {
+    console.log("Hello")
 }
 
