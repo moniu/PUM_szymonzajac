@@ -4,7 +4,7 @@ let time = 0;
 let bullets = [];
 let balls = [];
 let playerPos = 400;
-window.addEventListener("onkeypress", handleKey);
+document.onkeydown = handleKey;
 
 var refreshInterval = setInterval(() => {
     
@@ -32,7 +32,7 @@ function createBullet(startX) {
     return {x:startX, y:525};
 }
 
-function handleKey() {
+function handleKey(event) {
     console.log("Hello")
 }
 
