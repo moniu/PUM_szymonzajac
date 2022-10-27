@@ -11,11 +11,14 @@ let ballsMax = 10;
 let ballsSize = 50;
 let ballsTimer = 0;
 let ballsInterval = 50;
+let killedBalls = 0;
 document.onkeydown = handleKey;
 
 let leftArrowKeyCode = 37;
 let rightArrowKeyCode = 39;
 let spacebarKeyCode = 32;
+
+ctx.font = '25px Arial';
 
 var refreshInterval = setInterval(() => {
     
@@ -36,6 +39,7 @@ var refreshInterval = setInterval(() => {
                 bullets = bullets.filter(b => b != bullet);
                 balls = balls.filter(b => b!=ball);
                 ballsCount--;
+                killedBalls++;
                 return;
             }
         });
@@ -73,6 +77,9 @@ var refreshInterval = setInterval(() => {
     // ctx.fill();
 
     time+=5;
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(""+ killedBalls, 350, 300);
 
 }, 20)
 
