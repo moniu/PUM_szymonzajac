@@ -34,7 +34,9 @@ var refreshInterval = setInterval(() => {
     });
 
     bullets.forEach(bullet => {
-        
+        bullet.y ++;
+
+        ctx.fillStyle = "#FFB806";
     });
 
 
