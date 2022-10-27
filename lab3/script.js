@@ -9,6 +9,8 @@ let bulletSpeed = 10;
 let ballsCount = 0;
 let ballsMax = 10;
 let ballsSize = 50;
+let ballsTimer = 0;
+let ballsInterval = 200;
 document.onkeydown = handleKey;
 
 let leftArrowKeyCode = 37;
@@ -53,9 +55,12 @@ var refreshInterval = setInterval(() => {
 
 
     if (ballsCount < ballsMax) {
-        balls.push({x:Math.random() * 700 + 50, y:50});
-        ballsCount++;
-        console.log(balls);
+        if (ballsTimer > ballsInterval) {
+            balls.push({x:Math.random() * 700 + 50, y:50});
+            ballsCount++;
+            ballsTimer = 0;
+        }
+        ballsTimer++;
     }
 
     // let color = Math.abs(time%510-255);
