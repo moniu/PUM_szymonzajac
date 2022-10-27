@@ -6,6 +6,9 @@ let balls = [];
 let playerPos = 400;
 let playerSpeed = 10;
 let bulletSpeed = 10;
+let ballsCount = 0;
+let ballsMax = 10;
+let ballsSize = 50;
 document.onkeydown = handleKey;
 
 let leftArrowKeyCode = 37;
@@ -23,13 +26,14 @@ var refreshInterval = setInterval(() => {
     balls.forEach(ball => {
         ctx.fillStyle = "#1558D1";
         ctx.beginPath()
-        ctx.arc(ball.x, ball.y, 75, 0, Math.PI*2);
+        ctx.arc(ball.x, ball.y, ballsSize, 0, Math.PI*2);
         ctx.fill();
 
         bullets.forEach(bullet => {
-            if (distance(ball.x, ball.y, bullet.x, bullet.y) < 75 ) {
+            if (distance(ball.x, ball.y, bullet.x, bullet.y) < ballsSize ) {
                 bullets = bullets.filter(b => b != bullet);
                 balls = balls.filter(b => b!=ball);
+                ballsCount--;
                 return;
             }
         });
@@ -47,6 +51,12 @@ var refreshInterval = setInterval(() => {
         ctx.fillRect(bullet.x, bullet.y, 5, 20);
     });
 
+
+    if (ballsCount < ballsMax) {
+        balls.push({x:Math.random() * 700 + 50, y:50});
+        ballsCount++;
+        console.log(balls);
+    }
 
     // let color = Math.abs(time%510-255);
     // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
