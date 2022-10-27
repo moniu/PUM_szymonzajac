@@ -4,6 +4,7 @@ let time = 0;
 let bullets = [];
 let balls = [];
 let playerPos = 400;
+let playerSpeed = 10;
 let bulletSpeed = 10;
 document.onkeydown = handleKey;
 
