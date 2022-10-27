@@ -4,6 +4,7 @@ let time = 0;
 let bullets = [];
 let balls = [];
 let playerPos = 400;
+let bulletSpeed = 10;
 document.onkeydown = handleKey;
 
 let leftArrowKeyCode = 37;
@@ -34,9 +35,15 @@ var refreshInterval = setInterval(() => {
     });
 
     bullets.forEach(bullet => {
-        bullet.y ++;
+        bullet.y-=bulletSpeed;
+
+        if (bullet.y < 0) {
+            bullets = bullets.filter(b => b!=bullet);
+            return;
+        }
 
         ctx.fillStyle = "#FFB806";
+        ctx.fillRect(bullet.x, bullet.y, 5, 20);
     });
 
 
@@ -64,6 +71,7 @@ function handleKey(event) {
         case rightArrowKeyCode:
             break;
         case spacebarKeyCode:
+            bullets.push(createBullet(playerPos))
             break;
         default:
     }
