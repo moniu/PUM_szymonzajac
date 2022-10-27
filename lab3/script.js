@@ -18,12 +18,15 @@ let leftArrowKeyCode = 37;
 let rightArrowKeyCode = 39;
 let spacebarKeyCode = 32;
 
-ctx.font = '25px Arial';
+ctx.font = '256px Consolas';
 
 var refreshInterval = setInterval(() => {
     
     ctx.fillStyle = "#202020";
     ctx.fillRect(0,0,800,600);
+
+    ctx.fillStyle = "#404040";
+    ctx.fillText(""+ killedBalls, 350, 350);
 
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPos - 25, 525, 50, 50);
@@ -77,9 +80,6 @@ var refreshInterval = setInterval(() => {
     // ctx.fill();
 
     time+=5;
-
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillText(""+ killedBalls, 350, 300);
 
 }, 20)
 
