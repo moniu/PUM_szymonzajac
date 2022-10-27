@@ -26,12 +26,21 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(0,0,800,600);
 
     ctx.fillStyle = "#404040";
-    ctx.fillText(""+ killedBalls, 350, 350);
+    ctx.fillText(""+ killedBalls, 325, 350);
 
+
+    ctx.fillStyle = "#101010";
+    ctx.fillRect(playerPos - 23, 528, 50, 50);
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPos - 25, 525, 50, 50);
 
     balls.forEach(ball => {
+        //shadow
+        ctx.fillStyle = "#101010";
+        ctx.beginPath()
+        ctx.arc(ball.x+2, ball.y+2, ballsSize, 0, Math.PI*2);
+        ctx.fill();
+
         ctx.fillStyle = "#1558D1";
         ctx.beginPath()
         ctx.arc(ball.x, ball.y, ballsSize, 0, Math.PI*2);
@@ -63,7 +72,7 @@ var refreshInterval = setInterval(() => {
 
     if (ballsCount < ballsMax) {
         if (ballsTimer > ballsInterval) {
-            balls.push({x:Math.random() * 700 + 50, y:50});
+            balls.push({x:Math.random() * 700 + 50, y:75});
             ballsCount++;
             ballsTimer = 0;
         }
