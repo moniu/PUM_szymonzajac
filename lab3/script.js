@@ -68,6 +68,8 @@ function createBullet(startX) {
 function handleKey(event) {
     switch (event.which) {
         case leftArrowKeyCode:
+            playerPos -= playerSpeed;
+            playerPos = Math.max(50, playerPos);
             break;
         case rightArrowKeyCode:
             playerPos += playerSpeed;
