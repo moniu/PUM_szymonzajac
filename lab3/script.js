@@ -26,8 +26,8 @@ var refreshInterval = setInterval(() => {
 
         bullets.forEach(bullet => {
             if (distance(ball.x, ball.y, bullet.x, bullet.y) < 75 ) {
-                bullets.filter(b => b != bullet);
-                balls.filter(b => b!=ball);
+                bullets = bullets.filter(b => b != bullet);
+                balls = balls.filter(b => b!=ball);
                 return;
             }
         });
