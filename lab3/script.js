@@ -6,6 +6,10 @@ let balls = [];
 let playerPos = 400;
 document.onkeydown = handleKey;
 
+let leftArrowKeyCode = 37;
+let rightArrowKeyCode = 39;
+let spacebarKeyCode = 32;
+
 var refreshInterval = setInterval(() => {
     
     ctx.fillStyle = "#202020";
@@ -13,6 +17,14 @@ var refreshInterval = setInterval(() => {
 
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPos - 25, 525, 50, 50);
+
+    balls.forEach(ball => {
+        
+    });
+
+    bullets.forEach(bullet => {
+        
+    });
 
 
     // let color = Math.abs(time%510-255);
@@ -33,6 +45,14 @@ function createBullet(startX) {
 }
 
 function handleKey(event) {
-    console.log("Hello")
+    switch (event.which) {
+        case leftArrowKeyCode:
+            break;
+        case rightArrowKeyCode:
+            break;
+        case spacebarKeyCode:
+            break;
+        default:
+    }
 }
 
