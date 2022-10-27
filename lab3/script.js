@@ -23,6 +23,14 @@ var refreshInterval = setInterval(() => {
         ctx.beginPath()
         ctx.arc(ball.x, ball.y, 75, 0, Math.PI*2);
         ctx.fill();
+
+        bullets.forEach(bullet => {
+            if (distance(ball.x, ball.y, bullet.x, bullet.y) < 75 ) {
+                bullets.filter(b => b != bullet);
+                balls.filter(b => b!=ball);
+                return;
+            }
+        });
     });
 
     bullets.forEach(bullet => {
@@ -59,3 +67,6 @@ function handleKey(event) {
     }
 }
 
+function distance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
+}
