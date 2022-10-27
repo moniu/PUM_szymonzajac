@@ -79,14 +79,6 @@ var refreshInterval = setInterval(() => {
         ballsTimer++;
     }
 
-    // let color = Math.abs(time%510-255);
-    // ctx.fillStyle = "rgb(0,"+color+","+(255-color)+")";
-
-    // let position = 350 + 150*Math.sin(time/(2*Math.PI));
-
-    // ctx.beginPath()
-    // ctx.arc(400, position, 100, 0, Math.PI*2);
-    // ctx.fill();
 
     time+=5;
 
