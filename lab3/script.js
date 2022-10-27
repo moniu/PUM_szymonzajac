@@ -10,7 +10,7 @@ let ballsCount = 0;
 let ballsMax = 10;
 let ballsSize = 50;
 let ballsTimer = 0;
-let ballsInterval = 200;
+let ballsInterval = 50;
 document.onkeydown = handleKey;
 
 let leftArrowKeyCode = 37;
