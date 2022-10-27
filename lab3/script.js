@@ -69,6 +69,8 @@ function handleKey(event) {
         case leftArrowKeyCode:
             break;
         case rightArrowKeyCode:
+            playerPos += playerSpeed;
+            playerPos = Math.min(750, playerPos);
             break;
         case spacebarKeyCode:
             bullets.push(createBullet(playerPos))
