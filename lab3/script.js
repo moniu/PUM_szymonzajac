@@ -69,7 +69,6 @@ var refreshInterval = setInterval(() => {
         ctx.fillRect(bullet.x, bullet.y, 5, 20);
     });
 
-
     if (ballsCount < ballsMax) {
         if (ballsTimer > ballsInterval) {
             balls.push({x:Math.random() * 700 + 50, y:75});
@@ -78,7 +77,6 @@ var refreshInterval = setInterval(() => {
         }
         ballsTimer++;
     }
-
 
     time+=5;
 
