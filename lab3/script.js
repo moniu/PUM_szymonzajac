@@ -28,7 +28,6 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#404040";
     ctx.fillText(""+ killedBalls, 325, 350);
 
-
     ctx.fillStyle = "#101010";
     ctx.fillRect(playerPos - 23, 528, 50, 50);
     ctx.fillStyle = "#921A1A";
