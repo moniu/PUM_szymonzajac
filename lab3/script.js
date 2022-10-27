@@ -19,7 +19,10 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(playerPos - 25, 525, 50, 50);
 
     balls.forEach(ball => {
-        
+        ctx.fillStyle = "#2562D5";
+        // ctx.beginPath()
+        // ctx.arc(400, position, 100, 0, Math.PI*2);
+        // ctx.fill();
     });
 
     bullets.forEach(bullet => {
