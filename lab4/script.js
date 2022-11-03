@@ -21,12 +21,22 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(000,0,800,600);
     ctx.fillStyle = "#808080";
     ctx.fillRect(100,0,600,600);
+    ctx.fillStyle = "#994336";
+    ctx.fillRect(100,0,10,600);
+    ctx.fillRect(700,0,10,600);
     
     ctx.fillStyle = "#FFF";
-    ctx.fillRect(250, (time+100)%600, 10, 30);
-    ctx.fillRect(250, (time+400)%600, 10, 30);
-    ctx.fillRect(550, (time+100)%600, 10, 30);
-    ctx.fillRect(550, (time+400)%600, 10, 30);
+    ctx.fillRect(250, (5*time+100)%600, 10, 30);
+    ctx.fillRect(250, (5*time+400)%600, 10, 30);
+    ctx.fillRect(550, (5*time+100)%600, 10, 30);
+    ctx.fillRect(550, (5*time+400)%600, 10, 30);
+
+    ctx.fillRect(100, (5*time+100)%600, 10, 50);
+    ctx.fillRect(100, (5*time+200)%600, 10, 50);
+    ctx.fillRect(100, (5*time+300)%600, 10, 50);
+    ctx.fillRect(100, (5*time+400)%600, 10, 50);
+    ctx.fillRect(100, (5*time+500)%600, 10, 50);
+    ctx.fillRect(100, (5*time+600)%600, 10, 50);
     
 
     ctx.fillStyle = "#921A1A";
