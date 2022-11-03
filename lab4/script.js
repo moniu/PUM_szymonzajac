@@ -89,7 +89,6 @@ var refreshInterval = setInterval(() => {
         barrier.y += 5;
         ctx.fillStyle = "#3b25c4";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
-        newBarriers.push(barrier);
     })
     playerPosX += playerSpeedX;
     playerPosY += playerSpeedY;
