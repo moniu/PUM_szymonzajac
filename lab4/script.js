@@ -63,8 +63,16 @@ var refreshInterval = setInterval(() => {
             barriers.filter(b => {b!=barrier});
             return;
         }
-        barrier.y += 5;
 
+        //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+        if (playerPosX < barrier.x + 50 &&
+            playerPosX + 50 > barrier.x &&
+            playerPosY < barrier.y + 100 &&
+            100 + playerPosY > barrier.y) {
+                console.log("Dead");
+            }
+
+        barrier.y += 5;
         ctx.fillStyle = "#3b25c4";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
     })
@@ -79,7 +87,6 @@ var refreshInterval = setInterval(() => {
 
     if(barrierSpawnTimer++ > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
-
         barriers.push({x:100+Math.random()*600, y:0})
         console.log(barriers)
     }
