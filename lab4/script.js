@@ -16,15 +16,28 @@ let playerPosY = 300;
 
 let playerSpeedX = 0;
 let playerSpeedY = 0;
+let score = 0;
 
 let barrierSpawnTimer = 0;
 let barrierSpawnInterval = 100;
 let barriers = [];
 
-ctx.font = '256px Consolas';
+let gameover = false;
+
+ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
 
+    if (gameover) {
+        ctx.font = '64px Consolas';
+        ctx.fillStyle = "#202020";
+        ctx.fillRect(000,0,800,600);
+        ctx.fillStyle = "#404040";
+        ctx.fillText("Game over", 200, 200);
+        ctx.fillText("Score: " + score, 200, 300);
+        ctx.fillText("Press spacebar", 200, 400);
+        return;
+    }
     //bg
     ctx.fillStyle = "#3d893b";
     ctx.fillRect(000,0,800,600);
@@ -60,7 +73,8 @@ var refreshInterval = setInterval(() => {
 
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
-            barriers.filter(b => {b!=barrier});
+            barriers = barriers.filter(b => {b!=barrier});
+            score++;
             return;
         }
 
@@ -69,7 +83,7 @@ var refreshInterval = setInterval(() => {
             playerPosX + 50 > barrier.x &&
             playerPosY < barrier.y + 100 &&
             100 + playerPosY > barrier.y) {
-                console.log("Dead");
+                gameover = true;
             }
 
         barrier.y += 5;
@@ -88,8 +102,11 @@ var refreshInterval = setInterval(() => {
     if(barrierSpawnTimer++ > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
         barriers.push({x:100+Math.random()*600, y:0})
-        console.log(barriers)
     }
+
+    ctx.font = '24px Consolas';
+    ctx.fillStyle = "#FFF";
+    ctx.fillText("Score: " + score, 350, 25);
 
     time += 5;
 
@@ -110,6 +127,15 @@ function handleKeyDown(event) {
         case upArrowKeyCode:
             playerSpeedY = -playerSpeed;
             break;
+        case spacebarKeyCode:
+            if (gameover) {
+                gameover = false;
+                barriers = [];
+                barrierSpawnTimer = 0;
+                playerPosX = 400;
+                playerPosY = 300
+                score = 0;
+            }
         default:
     }
 }
