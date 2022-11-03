@@ -1,7 +1,8 @@
 let canvas = document.getElementById("canvas1");
 let ctx = canvas.getContext("2d");
 let time = 0;
-document.onkeydown = handleKey;
+document.onkeydown = handleKeyDown;
+document.onkeyup = handleKeyUp;
 
 let leftArrowKeyCode = 37;
 let rightArrowKeyCode = 39;
@@ -12,6 +13,11 @@ let downArrowKeyCode = 40;
 let playerSpeed = 10;
 let playerPosX = 400;
 let playerPosY = 300;
+
+let playerSpeedX = 0;
+let playerSpeedY = 0;
+
+let barriers = [];
 
 ctx.font = '256px Consolas';
 
@@ -50,28 +56,53 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
 
+    barriers.forEach(barrier => {
+
+    })
+
+    playerPosX += playerSpeedX;
+    playerPosY += playerSpeedY;
+
+    if (playerPosX > 750) playerPosX = 750;
+    if (playerPosX < 50) playerPosX = 50;
+    if (playerPosY > 500) playerPosY = 500;
+    if (playerPosY < 100) playerPosY = 100;
+
     time += 5;
 
 }, 20)
 
 
-function handleKey(event) {
+function handleKeyDown(event) {
     switch (event.which) {
         case leftArrowKeyCode:
-            playerPosX -= playerSpeed;
-            playerPosX = Math.max(50, playerPosX);
+            playerSpeedX = -playerSpeed
             break;
         case rightArrowKeyCode:
-            playerPosX += playerSpeed;
-            playerPosX = Math.min(750, playerPosX);
+            playerSpeedX = playerSpeed;
             break;
         case downArrowKeyCode:
-            playerPosY += playerSpeed;
-            playerPosY = Math.min(500, playerPosY)
+            playerSpeedY = playerSpeed;
             break;
         case upArrowKeyCode:
-            playerPosY -= playerSpeed;
-            playerPosY = Math.max(100, playerPosY)
+            playerSpeedY = -playerSpeed;
+            break;
+        default:
+    }
+}
+function handleKeyUp(event) {
+    switch (event.which) {
+        case leftArrowKeyCode:
+            playerSpeedX = 0;
+            break;
+        case rightArrowKeyCode:
+            playerSpeedX = 0;
+            break;
+        case downArrowKeyCode:
+            playerSpeedY = 0;
+            break;
+        case upArrowKeyCode:
+            playerSpeedY = 0;
             break;
         default:
     }
