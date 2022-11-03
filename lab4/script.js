@@ -73,11 +73,11 @@ var refreshInterval = setInterval(() => {
 
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
-            barriers = barriers.filter(b => {b!=barrier});
             score++;
+            barriers = barriers.filter(b => barrier==b)
             return;
         }
-
+        
         //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
         if (playerPosX < barrier.x + 50 &&
             playerPosX + 50 > barrier.x &&
@@ -89,8 +89,8 @@ var refreshInterval = setInterval(() => {
         barrier.y += 5;
         ctx.fillStyle = "#3b25c4";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
+        newBarriers.push(barrier);
     })
-
     playerPosX += playerSpeedX;
     playerPosY += playerSpeedY;
 
@@ -101,7 +101,7 @@ var refreshInterval = setInterval(() => {
 
     if(barrierSpawnTimer++ > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
-        barriers.push({x:100+Math.random()*600, y:0})
+        barriers.push({x:100+Math.random()*600, y:-50})
     }
 
     ctx.font = '24px Consolas';
@@ -155,8 +155,4 @@ function handleKeyUp(event) {
             break;
         default:
     }
-}
-
-function distance(x1, y1, x2, y2) {
-    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
