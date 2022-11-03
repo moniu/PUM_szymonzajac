@@ -17,6 +17,8 @@ let playerPosY = 300;
 let playerSpeedX = 0;
 let playerSpeedY = 0;
 
+let barrierSpawnTimer = 0;
+let barrierSpawnInterval = 100;
 let barriers = [];
 
 ctx.font = '256px Consolas';
@@ -57,7 +59,14 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
 
     barriers.forEach(barrier => {
+        if (barrier.y > 700) {
+            barriers.filter(b => {b!=barrier});
+            return;
+        }
+        barrier.y += 5;
 
+        ctx.fillStyle = "#3b25c4";
+        ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
     })
 
     playerPosX += playerSpeedX;
@@ -67,6 +76,13 @@ var refreshInterval = setInterval(() => {
     if (playerPosX < 50) playerPosX = 50;
     if (playerPosY > 500) playerPosY = 500;
     if (playerPosY < 100) playerPosY = 100;
+
+    if(barrierSpawnTimer++ > barrierSpawnInterval) {
+        barrierSpawnTimer-= barrierSpawnInterval;
+
+        barriers.push({x:100+Math.random()*600, y:0})
+        console.log(barriers)
+    }
 
     time += 5;
 
