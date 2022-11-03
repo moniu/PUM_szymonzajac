@@ -74,7 +74,7 @@ var refreshInterval = setInterval(() => {
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
             score++;
-            barriers = barriers.filter(b => barrier==b)
+            barriers = barriers.filter(b => barrier!=b)
             return;
         }
         
