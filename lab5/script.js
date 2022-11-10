@@ -84,6 +84,18 @@ var refreshInterval = setInterval(() => {
             barriers = barriers.filter(b => barrier!=b)
             return;
         }
+
+        bullets.forEach(bullet=>{
+            if (bullet.x < barrier.x + 50 &&
+                bullet.x + 50 > barrier.x &&
+                bullet.y < barrier.y + 100 &&
+                100 + bullet.y > barrier.y) {
+                    score++;
+                    barriers = barriers.filter(b => barrier!=b)
+                    bullets = bullets.filter(b=> bullet!=b);
+                    return;
+                }
+        })
         
         //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
         if (playerPosX < barrier.x + 50 &&
