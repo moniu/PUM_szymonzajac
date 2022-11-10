@@ -50,19 +50,21 @@ var refreshInterval = setInterval(() => {
     //bg
     ctx.fillStyle = "#3d893b";
     ctx.fillRect(000,0,800,600);
-    ctx.fillStyle = "#808080";
+    ctx.fillStyle = "#606060";
     ctx.fillRect(100,0,600,600);
     ctx.fillStyle = "#994336";
     ctx.fillRect(100,0,10,600);
     ctx.fillRect(700,0,10,600);
 
     // middle road stripes
-    ctx.fillStyle = "#FFF";
+    
+    ctx.fillStyle = "#CCC";
     ctx.fillRect(250, (5*time+100)%600, 10, 100);
     ctx.fillRect(250, (5*time+400)%600, 10, 100);
     ctx.fillRect(550, (5*time+100)%600, 10, 100);
     ctx.fillRect(550, (5*time+400)%600, 10, 100);
 
+    ctx.fillStyle = "#C25B4B";
     // side stripes
     ctx.fillRect(100, (5*time+100)%600, 10, 50);
     ctx.fillRect(100, (5*time+200)%600, 10, 50);
