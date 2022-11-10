@@ -13,10 +13,11 @@ let downArrowKeyCode = 40;
 let playerSpeed = 10;
 let playerPosX = 400;
 let playerPosY = 300;
-
 let playerSpeedX = 0;
 let playerSpeedY = 0;
-let score = 0;
+
+let cars = 0;
+let collectedCoins = 0;
 
 let barrierSpawnTimer = 0;
 let barrierSpawnInterval = 100;
@@ -41,7 +42,7 @@ var refreshInterval = setInterval(() => {
         ctx.fillRect(000,0,800,600);
         ctx.fillStyle = "#404040";
         ctx.fillText("Game over", 200, 200);
-        ctx.fillText("Score: " + score, 200, 300);
+        ctx.fillText("Score: " + cars, 200, 300);
         ctx.fillText("Press spacebar", 200, 400);
         return;
     }
@@ -91,7 +92,7 @@ var refreshInterval = setInterval(() => {
 
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
-            score++;
+            cars++;
             barriers = barriers.filter(b => barrier!=b)
             return;
         }
@@ -101,7 +102,7 @@ var refreshInterval = setInterval(() => {
                 bullet.x + 50 > barrier.x &&
                 bullet.y < barrier.y + 100 &&
                 100 + bullet.y > barrier.y) {
-                    score++;
+                    cars++;
                     barriers = barriers.filter(b => barrier!=b)
                     bullets = bullets.filter(b=> bullet!=b);
                     return;
@@ -143,7 +144,7 @@ var refreshInterval = setInterval(() => {
             playerPosX + 50 > bonus.x &&
             playerPosY < bonus.y + 50 &&
             50 + playerPosY > bonus.y) {
-                score++;
+                cars++;
                 bonuses = bonuses.filter(b => bonus!=b)
                 return;
             }
@@ -184,7 +185,8 @@ var refreshInterval = setInterval(() => {
 
     ctx.font = '24px Consolas';
     ctx.fillStyle = "#FFF";
-    ctx.fillText("Score: " + score, 350, 25);
+    ctx.fillText("Cars: " + cars, 25, 25);
+    ctx.fillText("Coins: " + collectedCoins, 25, 50);
 
     time += 5;
 
@@ -212,7 +214,7 @@ function handleKeyDown(event) {
                 barrierSpawnTimer = 0;
                 playerPosX = 400;
                 playerPosY = 300
-                score = 0;
+                cars = 0;
             }
             else {
                 bullets.push({x:playerPosX, y:playerPosY});
