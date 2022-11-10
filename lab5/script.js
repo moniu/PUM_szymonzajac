@@ -221,10 +221,12 @@ function handleKeyDown(event) {
             if (gameover) {
                 gameover = false;
                 barriers = [];
+                bonuses = [];
                 barrierSpawnTimer = 0;
                 playerPosX = 400;
                 playerPosY = 300
                 cars = 0;
+                collectedCoins = 0;
             }
             else {
                 bullets.push({x:playerPosX, y:playerPosY});
