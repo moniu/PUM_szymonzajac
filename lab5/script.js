@@ -22,6 +22,10 @@ let barrierSpawnTimer = 0;
 let barrierSpawnInterval = 100;
 let barriers = [];
 
+let bonusSpawnTimer = 0;
+let bonusSpawnInterval = 327;
+let bonuses = [];
+
 let gameover = false;
 
 ctx.font = '64px Consolas';
@@ -90,6 +94,28 @@ var refreshInterval = setInterval(() => {
         ctx.fillStyle = "#3b25c4";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
     })
+
+    bonuses.forEach(bonus => {
+        if (bonus.y > 700) {
+            bonuses = bonuses.filter(b => bonus!=b)
+            return;
+        }
+        
+        //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+        if (playerPosX < bonus.x + 50 &&
+            playerPosX + 50 > bonus.x &&
+            playerPosY < bonus.y + 50 &&
+            50 + playerPosY > bonus.y) {
+                score++;
+                bonuses = bonuses.filter(b => bonus!=b)
+                return;
+            }
+
+        bonus.y += 5;
+        ctx.fillStyle = "#F8BA0A";
+        ctx.fillRect(bonus.x - 25, bonus.y - 25, 50, 50);
+    })
+
     playerPosX += playerSpeedX;
     playerPosY += playerSpeedY;
 
@@ -101,6 +127,11 @@ var refreshInterval = setInterval(() => {
     if(barrierSpawnTimer++ > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
         barriers.push({x:100+Math.random()*600, y:-50})
+    }
+
+    if(bonusSpawnTimer++ > bonusSpawnInterval) {
+        bonusSpawnTimer-= bonusSpawnInterval;
+        bonuses.push({x:100+Math.random()*600, y:-50})
     }
 
     ctx.font = '24px Consolas';
