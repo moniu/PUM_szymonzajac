@@ -20,11 +20,11 @@ let cars = 0;
 let collectedCoins = 0;
 
 let barrierSpawnTimer = 0;
-let barrierSpawnInterval = 100;
+let barrierSpawnInterval = 50;
 let barriers = [];
 
 let bonusSpawnTimer = 0;
-let bonusSpawnInterval = 327;
+let bonusSpawnInterval = 166;
 let bonuses = [];
 
 let bullets = [];
@@ -42,8 +42,9 @@ var refreshInterval = setInterval(() => {
         ctx.fillRect(000,0,800,600);
         ctx.fillStyle = "#404040";
         ctx.fillText("Game over", 200, 200);
-        ctx.fillText("Score: " + cars, 200, 300);
-        ctx.fillText("Press spacebar", 200, 400);
+        ctx.fillText("Cars: " + cars, 200, 300);
+        ctx.fillText("Coins: " + collectedCoins, 200, 400);
+        ctx.fillText("Press spacebar", 200, 500);
         return;
     }
     //bg
@@ -142,16 +143,23 @@ var refreshInterval = setInterval(() => {
         //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
         if (playerPosX < bonus.x + 50 &&
             playerPosX + 50 > bonus.x &&
-            playerPosY < bonus.y + 50 &&
-            50 + playerPosY > bonus.y) {
-                cars++;
+            playerPosY < bonus.y + 75 &&
+            75 + playerPosY > bonus.y) {
+                collectedCoins++;
                 bonuses = bonuses.filter(b => bonus!=b)
                 return;
             }
 
-        bonus.y += 5;
+        bonus.y += 10;
         ctx.fillStyle = "#F8BA0A";
-        ctx.fillRect(bonus.x - 25, bonus.y - 25, 50, 50);
+        ctx.beginPath()
+        ctx.arc(bonus.x, bonus.y, 25, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#F7C63A";
+        ctx.arc(bonus.x, bonus.y, 20, 0, Math.PI * 2);
+        ctx.fill();
     })
 
     bullets.forEach(bullet => {
