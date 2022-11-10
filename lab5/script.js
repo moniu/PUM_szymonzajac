@@ -83,6 +83,11 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(playerPosX+22, playerPosY+20, 8, 20);
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
+    ctx.fillStyle = "#363B40";
+    ctx.fillRect(playerPosX - 20, playerPosY - 45, 40, 20);
+    ctx.fillRect(playerPosX - 20, playerPosY + 15, 40, 30);
+    ctx.fillStyle = "#B81D1D";
+    ctx.fillRect(playerPosX - 20, playerPosY -25, 40, 40);
 
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
