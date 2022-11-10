@@ -75,6 +75,12 @@ var refreshInterval = setInterval(() => {
     ctx.fillRect(700, (5*time+500)%600, 10, 50);
     ctx.fillRect(700, (5*time+600)%600, 10, 50);
 
+    
+    ctx.fillStyle = "#252525";
+    ctx.fillRect(playerPosX-30, playerPosY-40, 8, 20);
+    ctx.fillRect(playerPosX+22, playerPosY-40, 8, 20);
+    ctx.fillRect(playerPosX-30, playerPosY+20, 8, 20);
+    ctx.fillRect(playerPosX+22, playerPosY+20, 8, 20);
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
 
@@ -85,7 +91,7 @@ var refreshInterval = setInterval(() => {
             return;
         }
 
-        bullets.forEach(bullet=>{
+        bullets.forEach(bullet => {
             if (bullet.x < barrier.x + 50 &&
                 bullet.x + 50 > barrier.x &&
                 bullet.y < barrier.y + 100 &&
@@ -102,10 +108,11 @@ var refreshInterval = setInterval(() => {
             playerPosX + 50 > barrier.x &&
             playerPosY < barrier.y + 100 &&
             100 + playerPosY > barrier.y) {
-                gameover = true;
-            }
+            gameover = true;
+        }
 
         barrier.y += 5;
+
         ctx.fillStyle = "#3b25c4";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
     })
