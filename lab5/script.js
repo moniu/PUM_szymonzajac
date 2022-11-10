@@ -118,8 +118,18 @@ var refreshInterval = setInterval(() => {
 
         barrier.y += 5;
 
-        ctx.fillStyle = "#3b25c4";
+        ctx.fillStyle = "#252525";
+        ctx.fillRect(barrier.x - 30, barrier.y - 40, 8, 20);
+        ctx.fillRect(barrier.x + 22, barrier.y-40, 8, 20);
+        ctx.fillRect(barrier.x - 30, barrier.y+20, 8, 20);
+        ctx.fillRect(barrier.x + 22, barrier.y+20, 8, 20);
+        ctx.fillStyle = "#1E4A9D";
         ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
+        ctx.fillStyle = "#363B40";
+        ctx.fillRect(barrier.x - 20, barrier.y - 45, 40, 20);
+        ctx.fillRect(barrier.x - 20, barrier.y + 15, 40, 30);
+        ctx.fillStyle = "#1F56BD";
+        ctx.fillRect(barrier.x - 20, barrier.y -25, 40, 40);
     })
 
     bonuses.forEach(bonus => {
