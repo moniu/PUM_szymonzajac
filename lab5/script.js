@@ -26,6 +26,9 @@ let bonusSpawnTimer = 0;
 let bonusSpawnInterval = 327;
 let bonuses = [];
 
+let bullets = [];
+let bulletSpeed = 30;
+
 let gameover = false;
 
 ctx.font = '64px Consolas';
@@ -116,6 +119,17 @@ var refreshInterval = setInterval(() => {
         ctx.fillRect(bonus.x - 25, bonus.y - 25, 50, 50);
     })
 
+    bullets.forEach(bullet => {
+        bullet.y-= bulletSpeed;
+        if (bullet.y < 0) {
+            bullets = bullets.filter(b => bullet!=b);
+            return;
+        }
+
+        ctx.fillStyle = "#F8BA0A";
+        ctx.fillRect(bullet.x - 2, bullet.y - 4, 6, 10);
+    })
+
     playerPosX += playerSpeedX;
     playerPosY += playerSpeedY;
 
@@ -166,6 +180,10 @@ function handleKeyDown(event) {
                 playerPosY = 300
                 score = 0;
             }
+            else {
+                bullets.push({x:playerPosX, y:playerPosY});
+            }
+            break;
         default:
     }
 }
