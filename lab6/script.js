@@ -48,12 +48,10 @@ var refreshInterval = setInterval(() => {
         paintGameOver()
         return;
     }
-
     paintBackground()    
     paintRoadStripes()
     paintPlayer()
     
-
     barriers.forEach(barrier => {
         if (barrier.y > 700) {
             cars++;
@@ -82,7 +80,6 @@ var refreshInterval = setInterval(() => {
         }
 
         barrier.y += barrierSpeed * speedIndex;
-
         paintBarrier(barrier)
     })
 
@@ -126,12 +123,12 @@ var refreshInterval = setInterval(() => {
     if (playerPosY < 100) playerPosY = 100;
 
     barrierSpawnTimer+=speedIndex
-    bonusSpawnTimer+=speedIndex
     if(barrierSpawnTimer > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
         barriers.push({x:100+Math.random()*600, y:-50})
     }
 
+    bonusSpawnTimer+=speedIndex
     if(bonusSpawnTimer > bonusSpawnInterval) {
         bonusSpawnTimer-= bonusSpawnInterval;
         bonuses.push({x:100+Math.random()*600, y:-50})
@@ -146,7 +143,6 @@ var refreshInterval = setInterval(() => {
     time += 5;
 
 }, 20)
-
 
 function handleKeyDown(event) {
     console.log(event.which)
