@@ -209,6 +209,7 @@ var refreshInterval = setInterval(() => {
     ctx.fillStyle = "#FFF";
     ctx.fillText("Cars: " + cars, 25, 25);
     ctx.fillText("Coins: " + collectedCoins, 25, 50);
+    ctx.fillText("Speed: " + parseInt(speedIndex*100), 25, 75);
 
     time += 5;
 
@@ -247,11 +248,11 @@ function handleKeyDown(event) {
             break;
         case aKeyCode:
             speedIndex += 0.1;
-            speedIndex = min(maxSpeedIndex, max(minSpeedIndex, speedIndex))
+            speedIndex = Math.min(maxSpeedIndex, Math.max(minSpeedIndex, speedIndex))
             break;
         case zKeyCode:
             speedIndex -= 0.1;
-            speedIndex = min(maxSpeedIndex, max(minSpeedIndex, speedIndex))
+            speedIndex = Math.min(maxSpeedIndex, Math.max(minSpeedIndex, speedIndex))
             break;
         default:
     }
