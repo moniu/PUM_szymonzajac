@@ -51,25 +51,7 @@ var refreshInterval = setInterval(() => {
 
     paintBackground()    
     paintRoadStripes()
-
-    ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(playerSpeedX  * Math.PI / 180)
-    ctx.translate(-playerPosX, -playerPosY)
-    ctx.fillStyle = "#252525";
-    ctx.fillRect(playerPosX-30, playerPosY-40, 8, 20);
-    ctx.fillRect(playerPosX+22, playerPosY-40, 8, 20);
-    ctx.fillRect(playerPosX-30, playerPosY+20, 8, 20);
-    ctx.fillRect(playerPosX+22, playerPosY+20, 8, 20);
-    ctx.fillStyle = "#921A1A";
-    ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
-    ctx.fillStyle = "#363B40";
-    ctx.fillRect(playerPosX - 20, playerPosY - 45, 40, 20);
-    ctx.fillRect(playerPosX - 20, playerPosY + 15, 40, 30);
-    ctx.fillStyle = "#B81D1D";
-    ctx.fillRect(playerPosX - 20, playerPosY -25, 40, 40);
-    ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(-playerSpeedX * Math.PI / 180)
-    ctx.translate(-playerPosX, -playerPosY)
+    paintPlayer()
     
 
     barriers.forEach(barrier => {
@@ -286,4 +268,25 @@ function paintGameOver() {
     ctx.fillText("Cars: " + cars, 200, 300);
     ctx.fillText("Coins: " + collectedCoins, 200, 400);
     ctx.fillText("Press spacebar", 200, 500);
+}
+
+function paintPlayer() {
+    ctx.translate(playerPosX, playerPosY)
+    ctx.rotate(playerSpeedX  * Math.PI / 180)
+    ctx.translate(-playerPosX, -playerPosY)
+    ctx.fillStyle = "#252525";
+    ctx.fillRect(playerPosX-30, playerPosY-40, 8, 20);
+    ctx.fillRect(playerPosX+22, playerPosY-40, 8, 20);
+    ctx.fillRect(playerPosX-30, playerPosY+20, 8, 20);
+    ctx.fillRect(playerPosX+22, playerPosY+20, 8, 20);
+    ctx.fillStyle = "#921A1A";
+    ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
+    ctx.fillStyle = "#363B40";
+    ctx.fillRect(playerPosX - 20, playerPosY - 45, 40, 20);
+    ctx.fillRect(playerPosX - 20, playerPosY + 15, 40, 30);
+    ctx.fillStyle = "#B81D1D";
+    ctx.fillRect(playerPosX - 20, playerPosY -25, 40, 40);
+    ctx.translate(playerPosX, playerPosY)
+    ctx.rotate(-playerSpeedX * Math.PI / 180)
+    ctx.translate(-playerPosX, -playerPosY)
 }
