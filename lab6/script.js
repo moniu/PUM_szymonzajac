@@ -55,37 +55,9 @@ var refreshInterval = setInterval(() => {
         ctx.fillText("Press spacebar", 200, 500);
         return;
     }
-    //bg
-    ctx.fillStyle = "#3d893b";
-    ctx.fillRect(000,0,800,600);
-    ctx.fillStyle = "#606060";
-    ctx.fillRect(100,0,600,600);
-    ctx.fillStyle = "#994336";
-    ctx.fillRect(100,0,10,600);
-    ctx.fillRect(700,0,10,600);
 
-    // middle road stripes
-    
-    ctx.fillStyle = "#CCC";
-    ctx.fillRect(250, (speedIndex*roadSpeed*time+100)%600, 10, 100);
-    ctx.fillRect(250, (speedIndex*roadSpeed*time+400)%600, 10, 100);
-    ctx.fillRect(550, (speedIndex*roadSpeed*time+100)%600, 10, 100);
-    ctx.fillRect(550, (speedIndex*roadSpeed*time+400)%600, 10, 100);
-
-    ctx.fillStyle = "#C25B4B";
-    // side stripes
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+100)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+200)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+300)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+400)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+500)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+600)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+100)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+200)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+300)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+400)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+500)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+600)%600, 10, 50);
+    paintBackground()    
+    paintRoadStripes()
 
     ctx.translate(playerPosX, playerPosY)
     ctx.rotate(playerSpeedX  * Math.PI / 180)
@@ -277,4 +249,37 @@ function handleKeyUp(event) {
             break;
         default:
     }
+}
+
+function paintBackground() {
+    ctx.fillStyle = "#3d893b";
+    ctx.fillRect(000,0,800,600);
+    ctx.fillStyle = "#606060";
+    ctx.fillRect(100,0,600,600);
+    ctx.fillStyle = "#994336";
+    ctx.fillRect(100,0,10,600);
+    ctx.fillRect(700,0,10,600);
+}
+
+function paintRoadStripes() {
+    ctx.fillStyle = "#CCC";
+    ctx.fillRect(250, (speedIndex*roadSpeed*time+100)%600, 10, 100);
+    ctx.fillRect(250, (speedIndex*roadSpeed*time+400)%600, 10, 100);
+    ctx.fillRect(550, (speedIndex*roadSpeed*time+100)%600, 10, 100);
+    ctx.fillRect(550, (speedIndex*roadSpeed*time+400)%600, 10, 100);
+
+    ctx.fillStyle = "#C25B4B";
+    // side stripes
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+100)%600, 10, 50);
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+200)%600, 10, 50);
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+300)%600, 10, 50);
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+400)%600, 10, 50);
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+500)%600, 10, 50);
+    ctx.fillRect(100, (speedIndex*roadSpeed*time+600)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+100)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+200)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+300)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+400)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+500)%600, 10, 50);
+    ctx.fillRect(700, (speedIndex*roadSpeed*time+600)%600, 10, 50);
 }
