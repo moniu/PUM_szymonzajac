@@ -24,10 +24,12 @@ let collectedCoins = 0;
 let barrierSpawnTimer = 0;
 let barrierSpawnInterval = 50;
 let barriers = [];
+let barrierSpeed = 5;
 
 let bonusSpawnTimer = 0;
 let bonusSpawnInterval = 166;
 let bonuses = [];
+let bonusSpeed = 10
 
 let bullets = [];
 let bulletSpeed = 30;
@@ -132,7 +134,7 @@ var refreshInterval = setInterval(() => {
             gameover = true;
         }
 
-        barrier.y += 5 * speedIndex;
+        barrier.y += barrierSpeed * speedIndex;
 
         ctx.fillStyle = "#252525";
         ctx.fillRect(barrier.x - 30, barrier.y - 40, 8, 20);
@@ -164,7 +166,7 @@ var refreshInterval = setInterval(() => {
                 return;
             }
 
-        bonus.y += 10 * speedIndex;
+        bonus.y += bonusSpeed * speedIndex;
         ctx.fillStyle = "#F8BA0A";
         ctx.beginPath()
         ctx.arc(bonus.x, bonus.y, 25, 0, Math.PI * 2);
