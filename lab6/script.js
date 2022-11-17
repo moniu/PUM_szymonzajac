@@ -45,14 +45,7 @@ ctx.font = '64px Consolas';
 var refreshInterval = setInterval(() => {
 
     if (gameover) {
-        ctx.font = '64px Consolas';
-        ctx.fillStyle = "#202020";
-        ctx.fillRect(000,0,800,600);
-        ctx.fillStyle = "#404040";
-        ctx.fillText("Game over", 200, 200);
-        ctx.fillText("Cars: " + cars, 200, 300);
-        ctx.fillText("Coins: " + collectedCoins, 200, 400);
-        ctx.fillText("Press spacebar", 200, 500);
+        paintGameOver()
         return;
     }
 
@@ -282,4 +275,15 @@ function paintRoadStripes() {
     ctx.fillRect(700, (speedIndex*roadSpeed*time+400)%600, 10, 50);
     ctx.fillRect(700, (speedIndex*roadSpeed*time+500)%600, 10, 50);
     ctx.fillRect(700, (speedIndex*roadSpeed*time+600)%600, 10, 50);
+}
+
+function paintGameOver() {
+    ctx.font = '64px Consolas';
+    ctx.fillStyle = "#202020";
+    ctx.fillRect(000,0,800,600);
+    ctx.fillStyle = "#404040";
+    ctx.fillText("Game over", 200, 200);
+    ctx.fillText("Cars: " + cars, 200, 300);
+    ctx.fillText("Coins: " + collectedCoins, 200, 400);
+    ctx.fillText("Press spacebar", 200, 500);
 }
