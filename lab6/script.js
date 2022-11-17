@@ -103,15 +103,7 @@ var refreshInterval = setInterval(() => {
             }
 
         bonus.y += bonusSpeed * speedIndex;
-        ctx.fillStyle = "#F8BA0A";
-        ctx.beginPath()
-        ctx.arc(bonus.x, bonus.y, 25, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.fillStyle = "#F7C63A";
-        ctx.arc(bonus.x, bonus.y, 20, 0, Math.PI * 2);
-        ctx.fill();
+        paintBonus(bonus)
     })
 
     bullets.forEach(bullet => {
@@ -293,4 +285,16 @@ function paintBarrier(barrier) {
     ctx.fillRect(barrier.x - 20, barrier.y + 15, 40, 30);
     ctx.fillStyle = "#1F56BD";
     ctx.fillRect(barrier.x - 20, barrier.y -25, 40, 40);
+}
+
+function paintBonus(bonus) {
+    ctx.fillStyle = "#F8BA0A";
+    ctx.beginPath()
+    ctx.arc(bonus.x, bonus.y, 25, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = "#F7C63A";
+    ctx.arc(bonus.x, bonus.y, 20, 0, Math.PI * 2);
+    ctx.fill();
 }
