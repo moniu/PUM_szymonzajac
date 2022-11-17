@@ -195,12 +195,14 @@ var refreshInterval = setInterval(() => {
     if (playerPosY > 500) playerPosY = 500;
     if (playerPosY < 100) playerPosY = 100;
 
-    if(barrierSpawnTimer++ > barrierSpawnInterval) {
+    barrierSpawnTimer+=speedIndex
+    bonusSpawnTimer+=speedIndex
+    if(barrierSpawnTimer > barrierSpawnInterval) {
         barrierSpawnTimer-= barrierSpawnInterval;
         barriers.push({x:100+Math.random()*600, y:-50})
     }
 
-    if(bonusSpawnTimer++ > bonusSpawnInterval) {
+    if(bonusSpawnTimer > bonusSpawnInterval) {
         bonusSpawnTimer-= bonusSpawnInterval;
         bonuses.push({x:100+Math.random()*600, y:-50})
     }
