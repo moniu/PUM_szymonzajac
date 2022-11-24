@@ -21,7 +21,7 @@ let playerSpeedY = 0;
 let rotation = 0;
 let rotationGoal = 0;
 let rotationChangeSpeed = 1;
-let maximumRotation = 6;
+let maximumRotation = 4;
 
 let cars = 0;
 let collectedCoins = 0;
