@@ -18,6 +18,11 @@ let playerPosY = 300;
 let playerSpeedX = 0;
 let playerSpeedY = 0;
 
+let rotation = 0;
+let rotationGoal = 0;
+let rotationChangeSpeed = 2;
+let maximumRotation = 10;
+
 let cars = 0;
 let collectedCoins = 0;
 
@@ -40,10 +45,13 @@ let roadSpeed = 5;
 let maxSpeedIndex = 1.5;
 let minSpeedIndex = 0.5;
 
+let captuterPlayerPosX = playerPosX;
+let captuterPlayerPosY = playerPosY;
+let capturedRotation = rotation;
+
 ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
-    
     
     if (gameover) {
         paintGameOver()
@@ -51,11 +59,12 @@ var refreshInterval = setInterval(() => {
     }
 
     //this is to avoid rotating back by different number
-    let captuterPlayerPosX = playerPosX;
-    let captuterPlayerPosY = playerPosY;
+    captuterPlayerPosX = playerPosX;
+    captuterPlayerPosY = playerPosY;
+    capturedRotation = rotation;
 
     ctx.translate(captuterPlayerPosX, captuterPlayerPosY)
-    ctx.rotate(-playerSpeedX  * Math.PI / 180)
+    ctx.rotate(-capturedRotation  * Math.PI / 180)
     ctx.translate(-captuterPlayerPosX, -captuterPlayerPosY)
     
     paintBackground()    
@@ -126,11 +135,15 @@ var refreshInterval = setInterval(() => {
 
     playerPosX += playerSpeedX;
     playerPosY += playerSpeedY;
+    if (rotation > rotationGoal) rotation -= rotationChangeSpeed
+    if (rotation < rotationGoal) rotation += rotationChangeSpeed
 
     if (playerPosX > 750) playerPosX = 750;
     if (playerPosX < 50) playerPosX = 50;
     if (playerPosY > 500) playerPosY = 500;
     if (playerPosY < 100) playerPosY = 100;
+    if (rotation > maximumRotation) rotation = maximumRotation;
+    if (rotation < -maximumRotation) rotation = -maximumRotation
 
     barrierSpawnTimer+=speedIndex
     if(barrierSpawnTimer > barrierSpawnInterval) {
@@ -145,7 +158,7 @@ var refreshInterval = setInterval(() => {
     }
 
     ctx.translate(captuterPlayerPosX, captuterPlayerPosY)
-    ctx.rotate(playerSpeedX  * Math.PI / 180)
+    ctx.rotate(capturedRotation  * Math.PI / 180)
     ctx.translate(-captuterPlayerPosX, -captuterPlayerPosY)
 
     ctx.font = '24px Consolas';
@@ -153,6 +166,8 @@ var refreshInterval = setInterval(() => {
     ctx.fillText("Cars: " + cars, 25, 25);
     ctx.fillText("Coins: " + collectedCoins, 25, 50);
     ctx.fillText("Speed: " + parseInt(speedIndex*100), 25, 75);
+    ctx.fillText("RotationGoal: " + rotationGoal, 25, 100);
+    ctx.fillText("Rotation: " + rotation, 25, 125);
 
     time += 5;
 
@@ -164,9 +179,11 @@ function handleKeyDown(event) {
     switch (event.which) {
         case leftArrowKeyCode:
             playerSpeedX = -playerSpeed
+            rotationGoal = -maximumRotation;
             break;
         case rightArrowKeyCode:
             playerSpeedX = playerSpeed;
+            rotationGoal = maximumRotation;
             break;
         case downArrowKeyCode:
             playerSpeedY = playerSpeed;
@@ -204,9 +221,11 @@ function handleKeyUp(event) {
     switch (event.which) {
         case leftArrowKeyCode:
             playerSpeedX = 0;
+            rotationGoal = 0;
             break;
         case rightArrowKeyCode:
             playerSpeedX = 0;
+            rotationGoal = 0;
             break;
         case downArrowKeyCode:
             playerSpeedY = 0;
