@@ -283,7 +283,7 @@ function paintGameOver() {
 
 function paintPlayer() {
     ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(playerSpeedX  * Math.PI / 180)
+    ctx.rotate(capturedRotation  * Math.PI / 180)
     ctx.translate(-playerPosX, -playerPosY)
     ctx.fillStyle = "#252525";
     ctx.fillRect(playerPosX-30, playerPosY-40, 8, 20);
@@ -298,7 +298,7 @@ function paintPlayer() {
     ctx.fillStyle = "#B81D1D";
     ctx.fillRect(playerPosX - 20, playerPosY -25, 40, 40);
     ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(-playerSpeedX * Math.PI / 180)
+    ctx.rotate(-capturedRotation * Math.PI / 180)
     ctx.translate(-playerPosX, -playerPosY)
 }
 
