@@ -43,11 +43,21 @@ let minSpeedIndex = 0.5;
 ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
-
+    
+    
     if (gameover) {
         paintGameOver()
         return;
     }
+
+    //this is to avoid rotating back by different number
+    let captuterPlayerPosX = playerPosX;
+    let captuterPlayerPosY = playerPosY;
+
+    ctx.translate(captuterPlayerPosX, captuterPlayerPosY)
+    ctx.rotate(-playerSpeedX  * Math.PI / 180)
+    ctx.translate(-captuterPlayerPosX, -captuterPlayerPosY)
+    
     paintBackground()    
     paintRoadStripes()
     paintPlayer()
@@ -134,6 +144,10 @@ var refreshInterval = setInterval(() => {
         bonuses.push({x:100+Math.random()*600, y:-50})
     }
 
+    ctx.translate(captuterPlayerPosX, captuterPlayerPosY)
+    ctx.rotate(playerSpeedX  * Math.PI / 180)
+    ctx.translate(-captuterPlayerPosX, -captuterPlayerPosY)
+
     ctx.font = '24px Consolas';
     ctx.fillStyle = "#FFF";
     ctx.fillText("Cars: " + cars, 25, 25);
@@ -141,6 +155,7 @@ var refreshInterval = setInterval(() => {
     ctx.fillText("Speed: " + parseInt(speedIndex*100), 25, 75);
 
     time += 5;
+
 
 }, 20)
 
@@ -205,12 +220,12 @@ function handleKeyUp(event) {
 
 function paintBackground() {
     ctx.fillStyle = "#3d893b";
-    ctx.fillRect(000,0,800,600);
+    ctx.fillRect(-200,-200,1200,1000);
     ctx.fillStyle = "#606060";
-    ctx.fillRect(100,0,600,600);
+    ctx.fillRect(100,-200,600,1000);
     ctx.fillStyle = "#994336";
-    ctx.fillRect(100,0,10,600);
-    ctx.fillRect(700,0,10,600);
+    ctx.fillRect(100,-200,10,1000);
+    ctx.fillRect(700,-200,10,1000);
 }
 
 function paintRoadStripes() {
