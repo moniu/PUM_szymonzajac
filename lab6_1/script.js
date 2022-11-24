@@ -166,8 +166,6 @@ var refreshInterval = setInterval(() => {
     ctx.fillText("Cars: " + cars, 25, 25);
     ctx.fillText("Coins: " + collectedCoins, 25, 50);
     ctx.fillText("Speed: " + parseInt(speedIndex*100), 25, 75);
-    ctx.fillText("RotationGoal: " + rotationGoal, 25, 100);
-    ctx.fillText("Rotation: " + rotation, 25, 125);
 
     time += 5;
 
