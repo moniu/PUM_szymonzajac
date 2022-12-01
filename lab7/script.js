@@ -29,6 +29,9 @@ let enemies = [];
 let enemySpeed = 3;
 let enemyWidth = 150;
 let enemyHeight = 50;
+let enemySpawningInterval = 200;
+let enemySpawningTimer = 0;
+
 
 let score = 0;
 
@@ -50,7 +53,7 @@ var refreshInterval = setInterval(() => {
     playerSpeedY += gravity * playerWeight
     playerPosY = Math.min(playerPosY, 500)
 
-    enemies.filter(enemy => {
+    enemies = enemies.filter(enemy => {
         enemy.x -= enemySpeed;
         if (enemy.x < -200) {
             score++;
@@ -63,6 +66,12 @@ var refreshInterval = setInterval(() => {
         return true;
     });
 
+
+    enemySpawningTimer++;
+    if (enemySpawningTimer >= enemySpawningInterval) {
+        enemySpawningTimer -= enemySpawningInterval;
+        spawnEnemy();
+    }
     time += 3;
 
 
