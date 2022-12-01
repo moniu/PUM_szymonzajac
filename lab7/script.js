@@ -30,6 +30,8 @@ let enemySpeed = 3;
 let enemyWidth = 150;
 let enemyHeight = 50;
 
+let score = 0;
+
 ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
@@ -42,6 +44,7 @@ var refreshInterval = setInterval(() => {
     paintBackground()
     paintRoadStripes()
     paintPlayer()
+    displayScore();
 
     playerPosY += playerSpeedY;
     playerSpeedY += gravity * playerWeight
@@ -50,6 +53,7 @@ var refreshInterval = setInterval(() => {
     enemies.filter(enemy => {
         enemy.x -= enemySpeed;
         if (enemy.x < -200) {
+            score++;
             return false;
         }
         if (enemyAndPlayerCollides(enemy)) {
@@ -59,7 +63,7 @@ var refreshInterval = setInterval(() => {
         return true;
     });
 
-    time += 1;
+    time += 3;
 
 
 }, 4)
@@ -72,6 +76,7 @@ function handleKeyDown(event) {
                 gameover = false;
                 enemies = []
                 playerPosY = 500;
+                score = 0;
             }
             else {
                 playerSpeedY = -20
@@ -112,8 +117,7 @@ function paintGameOver() {
     ctx.fillRect(000,0,800,600);
     ctx.fillStyle = "#404040";
     ctx.fillText("Game over", 200, 200);
-    ctx.fillText("Cars: " + cars, 200, 300);
-    ctx.fillText("Coins: " + collectedCoins, 200, 400);
+    ctx.fillText("Score: " + score, 200, 300);
     ctx.fillText("Press spacebar", 200, 500);
 }
 
@@ -143,6 +147,12 @@ function paintEnemy(enemy) {
 
     ctx.fillStyle = "#1A1A92";
     ctx.fillRect(enemy.x - 75, enemy.y - 25, 150, 50);
+}
+
+function displayScore() {
+    ctx.font = '32px Arial';
+    ctx.fillStyle = "#FFF"
+    ctx.fillText("Score: " + score, 25, 50);
 }
 
 function enemyAndPlayerCollides(enemy) {
