@@ -71,6 +71,8 @@ var refreshInterval = setInterval(() => {
     if (enemySpawningTimer >= enemySpawningInterval) {
         enemySpawningTimer -= enemySpawningInterval;
         spawnEnemy();
+
+        enemySpawningInterval = Math.random() * 150 + 50
     }
     time += 3;
 
