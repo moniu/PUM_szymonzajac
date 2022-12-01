@@ -18,36 +18,7 @@ let playerPosY = 300;
 let playerSpeedX = 0;
 let playerSpeedY = 0;
 
-let rotation = 0;
-let rotationGoal = 0;
-let rotationChangeSpeed = 1;
-let maximumRotation = 4;
-
-let cars = 0;
-let collectedCoins = 0;
-
-let barrierSpawnTimer = 0;
-let barrierSpawnInterval = 50;
-let barriers = [];
-let barrierSpeed = 5;
-
-let bonusSpawnTimer = 0;
-let bonusSpawnInterval = 166;
-let bonuses = [];
-let bonusSpeed = 10
-
-let bullets = [];
-let bulletSpeed = 30;
-
 let gameover = false;
-let speedIndex = 1.0;
-let roadSpeed = 5;
-let maxSpeedIndex = 1.5;
-let minSpeedIndex = 0.5;
-
-let captuterPlayerPosX = playerPosX;
-let captuterPlayerPosY = playerPosY;
-let capturedRotation = rotation;
 
 ctx.font = '64px Consolas';
 
@@ -57,6 +28,8 @@ var refreshInterval = setInterval(() => {
         paintGameOver()
         return;
     }
+
+    paintPlayer()
 
 
     time += 1;
@@ -172,24 +145,17 @@ function paintGameOver() {
 }
 
 function paintPlayer() {
-    ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(capturedRotation  * Math.PI / 180)
-    ctx.translate(-playerPosX, -playerPosY)
     ctx.fillStyle = "#252525";
-    ctx.fillRect(playerPosX-30, playerPosY-40, 8, 20);
-    ctx.fillRect(playerPosX+22, playerPosY-40, 8, 20);
-    ctx.fillRect(playerPosX-30, playerPosY+20, 8, 20);
-    ctx.fillRect(playerPosX+22, playerPosY+20, 8, 20);
+
+    ctx.beginPath()
+    ctx.arc(playerPosX-40, playerPosY+25, 25, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath()
+    ctx.arc(playerPosX+40, playerPosY+25, 25, 0, Math.PI * 2);
+    ctx.fill();
+
     ctx.fillStyle = "#921A1A";
-    ctx.fillRect(playerPosX - 25, playerPosY - 50, 50, 100);
-    ctx.fillStyle = "#363B40";
-    ctx.fillRect(playerPosX - 20, playerPosY - 45, 40, 20);
-    ctx.fillRect(playerPosX - 20, playerPosY + 15, 40, 30);
-    ctx.fillStyle = "#B81D1D";
-    ctx.fillRect(playerPosX - 20, playerPosY -25, 40, 40);
-    ctx.translate(playerPosX, playerPosY)
-    ctx.rotate(-capturedRotation * Math.PI / 180)
-    ctx.translate(-playerPosX, -playerPosY)
+    ctx.fillRect(playerPosX - 75, playerPosY - 25, 150, 50);
 }
 
 function paintBarrier(barrier) {
