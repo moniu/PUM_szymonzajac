@@ -17,8 +17,13 @@ let playerPosX = 400;
 let playerPosY = 300;
 let playerSpeedX = 0;
 let playerSpeedY = 0;
+let playerWeight = 1;
+
+let gravity = 0.98
 
 let gameover = false;
+
+let roadSpeed = 5
 
 ctx.font = '64px Consolas';
 
@@ -29,8 +34,14 @@ var refreshInterval = setInterval(() => {
         return;
     }
 
+    paintBackground()
+    paintRoadStripes()
     paintPlayer()
 
+    playerPosY += playerSpeedY;
+    playerSpeedY += gravity * playerWeight
+
+    playerPosY = Math.min(playerPosY, 500)
 
     time += 1;
 
@@ -40,97 +51,36 @@ var refreshInterval = setInterval(() => {
 function handleKeyDown(event) {
     console.log(event.which)
     switch (event.which) {
-        case leftArrowKeyCode:
-            playerSpeedX = -playerSpeed
-            rotationGoal = -maximumRotation;
-            break;
-        case rightArrowKeyCode:
-            playerSpeedX = playerSpeed;
-            rotationGoal = maximumRotation;
-            break;
-        case downArrowKeyCode:
-            playerSpeedY = playerSpeed;
-            break;
-        case upArrowKeyCode:
-            playerSpeedY = -playerSpeed;
-            break;
         case spacebarKeyCode:
             if (gameover) {
                 gameover = false;
-                barriers = [];
-                bonuses = [];
-                barrierSpawnTimer = 0;
-                playerPosX = 400;
-                playerPosY = 300
-                cars = 0;
-                collectedCoins = 0;
+
             }
             else {
-                bullets.push({x:playerPosX, y:playerPosY});
+                playerSpeedY = -20
             }
-            break;
-        case aKeyCode:
-            speedIndex += 0.1;
-            speedIndex = Math.min(maxSpeedIndex, Math.max(minSpeedIndex, speedIndex))
-            break;
-        case zKeyCode:
-            speedIndex -= 0.1;
-            speedIndex = Math.min(maxSpeedIndex, Math.max(minSpeedIndex, speedIndex))
-            break;
         default:
     }
 }
 function handleKeyUp(event) {
     switch (event.which) {
-        case leftArrowKeyCode:
-            playerSpeedX = 0;
-            rotationGoal = 0;
-            break;
-        case rightArrowKeyCode:
-            playerSpeedX = 0;
-            rotationGoal = 0;
-            break;
-        case downArrowKeyCode:
-            playerSpeedY = 0;
-            break;
-        case upArrowKeyCode:
-            playerSpeedY = 0;
-            break;
         default:
     }
 }
 
 function paintBackground() {
-    ctx.fillStyle = "#3d893b";
+    ctx.fillStyle = "#0099ff";
     ctx.fillRect(-200,-200,1200,1000);
-    ctx.fillStyle = "#606060";
-    ctx.fillRect(100,-200,600,1000);
-    ctx.fillStyle = "#994336";
-    ctx.fillRect(100,-200,10,1000);
-    ctx.fillRect(700,-200,10,1000);
+    ctx.fillStyle = "#1a1a1a"
+    ctx.fillRect(-200,500,1200,1000);
+    ctx.fillStyle = "#660000"
+    ctx.fillRect(-200,500,1200,25);
 }
 
 function paintRoadStripes() {
     ctx.fillStyle = "#CCC";
-    ctx.fillRect(250, (speedIndex*roadSpeed*time+100)%600, 10, 100);
-    ctx.fillRect(250, (speedIndex*roadSpeed*time+400)%600, 10, 100);
-    ctx.fillRect(550, (speedIndex*roadSpeed*time+100)%600, 10, 100);
-    ctx.fillRect(550, (speedIndex*roadSpeed*time+400)%600, 10, 100);
-
-    ctx.fillStyle = "#C25B4B";
-    // side stripes
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+100)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+200)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+300)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+400)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+500)%600, 10, 50);
-    ctx.fillRect(100, (speedIndex*roadSpeed*time+600)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+100)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+200)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+300)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+400)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+500)%600, 10, 50);
-    ctx.fillRect(700, (speedIndex*roadSpeed*time+600)%600, 10, 50);
+    ctx.fillRect(1000 - (roadSpeed*time+0)%1200, 500, 100, 25);
+    ctx.fillRect(1000 - (roadSpeed*time+600)%1200, 500, 100, 25);
 }
 
 function paintGameOver() {
@@ -156,31 +106,4 @@ function paintPlayer() {
 
     ctx.fillStyle = "#921A1A";
     ctx.fillRect(playerPosX - 75, playerPosY - 25, 150, 50);
-}
-
-function paintBarrier(barrier) {
-    ctx.fillStyle = "#252525";
-    ctx.fillRect(barrier.x - 30, barrier.y - 40, 8, 20);
-    ctx.fillRect(barrier.x + 22, barrier.y-40, 8, 20);
-    ctx.fillRect(barrier.x - 30, barrier.y+20, 8, 20);
-    ctx.fillRect(barrier.x + 22, barrier.y+20, 8, 20);
-    ctx.fillStyle = "#1E4A9D";
-    ctx.fillRect(barrier.x - 25, barrier.y - 50, 50, 100);
-    ctx.fillStyle = "#363B40";
-    ctx.fillRect(barrier.x - 20, barrier.y - 45, 40, 20);
-    ctx.fillRect(barrier.x - 20, barrier.y + 15, 40, 30);
-    ctx.fillStyle = "#1F56BD";
-    ctx.fillRect(barrier.x - 20, barrier.y -25, 40, 40);
-}
-
-function paintBonus(bonus) {
-    ctx.fillStyle = "#F8BA0A";
-    ctx.beginPath()
-    ctx.arc(bonus.x, bonus.y, 25, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "#F7C63A";
-    ctx.arc(bonus.x, bonus.y, 20, 0, Math.PI * 2);
-    ctx.fill();
 }
