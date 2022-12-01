@@ -18,13 +18,17 @@ let playerPosY = 300;
 let playerSpeedX = 0;
 let playerSpeedY = 0;
 let playerWeight = 1;
+let playerWidth = 150;
+let playerHeight = 50;
 
-let gravity = 0.98
+let gravity = 0.5
 let gameover = false;
 let roadSpeed = 5
 
 let enemies = [];
 let enemySpeed = 3;
+let enemyWidth = 150;
+let enemyHeight = 50;
 
 ctx.font = '64px Consolas';
 
@@ -48,6 +52,9 @@ var refreshInterval = setInterval(() => {
         if (enemy.x < -200) {
             return false;
         }
+        if (enemyAndPlayerCollides(enemy)) {
+            gameover = true;
+        }
         paintEnemy(enemy);
         return true;
     });
@@ -63,6 +70,8 @@ function handleKeyDown(event) {
         case spacebarKeyCode:
             if (gameover) {
                 gameover = false;
+                enemies = []
+                playerPosY = 500;
             }
             else {
                 playerSpeedY = -20
@@ -119,7 +128,7 @@ function paintPlayer() {
     ctx.fill();
 
     ctx.fillStyle = "#921A1A";
-    ctx.fillRect(playerPosX - 75, playerPosY - 25, 150, 50);
+    ctx.fillRect(playerPosX - 75, playerPosY - 25, playerWidth, playerHeight);
 }
 
 function paintEnemy(enemy) {
@@ -134,4 +143,16 @@ function paintEnemy(enemy) {
 
     ctx.fillStyle = "#1A1A92";
     ctx.fillRect(enemy.x - 75, enemy.y - 25, 150, 50);
+}
+
+function enemyAndPlayerCollides(enemy) {
+    let pw2 = playerWidth/2;
+    let ph2 = playerHeight/2;
+    let ew2 = enemyWidth/2;
+    let eh2 = enemyHeight/2;
+
+    return (playerPosX + pw2 > enemy.x - ew2 &&
+            playerPosX - pw2 < enemy.x + ew2 &&
+            playerPosY + ph2 > enemy.y - eh2 &&
+            playerPosY - ph2 < enemy.y + eh2);
 }
