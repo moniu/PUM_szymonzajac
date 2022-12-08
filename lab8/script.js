@@ -20,7 +20,7 @@ let board = new Array(linesY)
 for (var y=0; y < linesY; y++){
     board[y] = new Array(linesX);
     for (var x=0; x<linesX; x++) {
-        board[y][x] = pieceState.Black;
+        board[y][x] = pieceState.Empty;
     }
 }
 
@@ -64,14 +64,20 @@ function paintAllPieces() {
 }
 
 function paintPiece(x, y, color) {
+    if (color == pieceState.Empty) {
+        return;
+    }
     if (color == pieceState.White) {
         ctx.fillStyle = "#EEE";
     }
     if (color == pieceState.Black) {
         ctx.fillStyle = "#111";
     }
+
+    var radius = Math.min(pieceSizeX, pieceSizeY)/2.2;
+
     ctx.beginPath();
-    ctx.arc((x+1) * pieceSizeX, (y+1) * pieceSizeY, Math.min(pieceSizeX,pieceSizeY)/2, 0, Math.PI * 2);
+    ctx.arc((x+1) * pieceSizeX, (y+1) * pieceSizeY, radius, 0, Math.PI * 2);
     ctx.fill();
 }
 
@@ -94,10 +100,17 @@ function keyHandler(event) {
     }
 }
 
+function getBoardClone() {
+    return JSON.parse(JSON.stringify(board));
+}
+
 function clickHandler(event) {
     var clickedX = Math.round(event.offsetX/pieceSizeX) - 1;
     var clickedY = Math.round(event.offsetY/pieceSizeY) - 1;
-    board[clickedY][clickedX] = pieceState.White;
-    swapTurn();
+
+    if (board[clickedY][clickedX] == pieceState.Empty) {
+        board[clickedY][clickedX] = turn;
+        swapTurn();
+    }
     refreshCanvas();
 }
