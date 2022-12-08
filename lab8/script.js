@@ -2,22 +2,53 @@ let canvas = document.getElementById("canvas1");
 let ctx = canvas.getContext("2d");
 let time = 0;
 
+let linesX = 19;
+let linesY = 19;
+let pieceSizeX = 800 / (linesX+1)
+let pieceSizeY = 600 / (linesY+1)
+
+
+let turn = "Black";
+
 ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
-
-
+    paintBackground()
 }, 4)
 
 
 
 function paintBackground() {
-    ctx.fillStyle = "#0099ff";
-    ctx.fillRect(-200,-200,1200,1000);
-    ctx.fillStyle = "#1a1a1a"
-    ctx.fillRect(-200,500,1200,1000);
-    ctx.fillStyle = "#660000"
-    ctx.fillRect(-200,500,1200,25);
+    ctx.fillStyle = "#BBB145";
+    ctx.fillRect(0, 0, 800, 600);
+
+    ctx.fillStyle = "#FFF"
+    for(var x = 0; x < linesX; x++) {
+        ctx.beginPath();
+        ctx.moveTo(pieceSizeX*(x+1), pieceSizeY)
+        ctx.lineTo(pieceSizeX*(x+1), 600-pieceSizeY)
+        ctx.stroke();
+    }
+
+    for(var y = 0; y < linesY; y++) {
+        ctx.beginPath();
+        ctx.moveTo(pieceSizeX, pieceSizeY*(y+1))
+        ctx.lineTo(800 - pieceSizeX, pieceSizeY*(y+1))
+        ctx.stroke();
+    }
+
+
+}
+
+function paintPiece(x, y, color) {
+    if (color == "Black") {
+        ctx.fillStyle = "#EEE";
+    }
+    if (color == "White") {
+        ctx.fillStyle = "#111";
+    }
+
+    
 }
 
 function paintEnemy(enemy) {
