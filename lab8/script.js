@@ -7,6 +7,19 @@ let linesY = 19;
 let pieceSizeX = 800 / (linesX+1)
 let pieceSizeY = 600 / (linesY+1)
 
+const pieceState = {
+    Empty: "Empty",
+    Black: "Black",
+    White: "White"
+};
+
+let board = new Array(linesY)
+for (var y=0; y < linesY; y++){
+    board[y] = new Array(linesX);
+    for (var x=0; x<linesX; x++) {
+        board[y][x] = pieceState.Black;
+    }
+}
 
 let turn = "Black";
 
@@ -14,6 +27,7 @@ ctx.font = '64px Consolas';
 
 var refreshInterval = setInterval(() => {
     paintBackground()
+    paintAllPieces()
 }, 4)
 
 
@@ -36,28 +50,25 @@ function paintBackground() {
         ctx.lineTo(800 - pieceSizeX, pieceSizeY*(y+1))
         ctx.stroke();
     }
+}
 
-
+function paintAllPieces() {
+    for (var y=0; y < linesY; y++){
+        for (var x=0; x<linesX; x++) {
+            paintPiece(x, y, board[y][x])
+        }
+     }
 }
 
 function paintPiece(x, y, color) {
-    if (color == "Black") {
+    if (color == pieceState.White) {
         ctx.fillStyle = "#EEE";
     }
-    if (color == "White") {
+    if (color == pieceState.Black) {
         ctx.fillStyle = "#111";
     }
-
-    
-}
-
-function paintEnemy(enemy) {
-    ctx.fillStyle = "#252525";
-
-    ctx.beginPath()
-    ctx.arc(enemy.x-40, enemy.y+25, 25, 0, Math.PI * 2);
+    ctx.beginPath();
+    ctx.arc((x+1) * pieceSizeX, (y+1) * pieceSizeY, Math.min(pieceSizeX,pieceSizeY)/2, 0, Math.PI * 2);
     ctx.fill();
-
-    ctx.fillStyle = "#1A1A92";
-    ctx.fillRect(enemy.x - 75, enemy.y - 25, 150, 50);
 }
+
