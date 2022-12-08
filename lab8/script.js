@@ -2,6 +2,8 @@ let canvas = document.getElementById("canvas1");
 let ctx = canvas.getContext("2d");
 let time = 0;
 
+document.onclick = clickHandler;
+
 let linesX = 19;
 let linesY = 19;
 let pieceSizeX = 800 / (linesX+1)
@@ -24,13 +26,12 @@ for (var y=0; y < linesY; y++){
 let turn = "Black";
 
 ctx.font = '64px Consolas';
+refreshCanvas()
 
-var refreshInterval = setInterval(() => {
+function refreshCanvas() {
     paintBackground()
     paintAllPieces()
-}, 4)
-
-
+}
 
 function paintBackground() {
     ctx.fillStyle = "#BBB145";
@@ -72,3 +73,9 @@ function paintPiece(x, y, color) {
     ctx.fill();
 }
 
+function clickHandler(event) {
+    var clickedX = Math.round(event.offsetX/pieceSizeX) - 1;
+    var clickedY = Math.round(event.offsetY/pieceSizeY) - 1;
+    board[clickedY][clickedX] = pieceState.White;
+    refreshCanvas();
+}
