@@ -3,6 +3,7 @@ let ctx = canvas.getContext("2d");
 let time = 0;
 
 document.onclick = clickHandler;
+document.onkeydown = keyHandler;
 
 let linesX = 19;
 let linesY = 19;
@@ -25,12 +26,13 @@ for (var y=0; y < linesY; y++){
 
 let turn = "Black";
 
-ctx.font = '64px Consolas';
+ctx.font = '16px Consolas';
 refreshCanvas()
 
 function refreshCanvas() {
     paintBackground()
     paintAllPieces()
+    printWhoseTurn()
 }
 
 function paintBackground() {
@@ -73,9 +75,29 @@ function paintPiece(x, y, color) {
     ctx.fill();
 }
 
+function printWhoseTurn() {
+    ctx.fillStyle = "#FFF"
+    ctx.fillText(turn+"s turn",5,12)
+}
+
+function swapTurn() {
+    if (turn == pieceState.White)
+        turn = pieceState.Black
+    else turn = pieceState.White
+}
+
+function keyHandler(event) {
+    if (event.which == 32) {
+        swapTurn();
+        refreshCanvas();
+        return;
+    }
+}
+
 function clickHandler(event) {
     var clickedX = Math.round(event.offsetX/pieceSizeX) - 1;
     var clickedY = Math.round(event.offsetY/pieceSizeY) - 1;
     board[clickedY][clickedX] = pieceState.White;
+    swapTurn();
     refreshCanvas();
 }
