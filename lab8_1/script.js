@@ -25,7 +25,6 @@ for (var y=0; y < linesY; y++){
 }
 
 let turn = "Black";
-
 ctx.font = '16px Consolas';
 refreshCanvas()
 
@@ -101,7 +100,8 @@ function printWhoseTurn() {
 function swapTurn() {
     if (turn == pieceState.White)
         turn = pieceState.Black
-    else turn = pieceState.White
+    else 
+        turn = pieceState.White
 }
 
 function keyHandler(event) {
@@ -245,7 +245,6 @@ function countEylets(group) {
     group.forEach(p => {
         eylets += getEyletNeighbours(p.x, p.y);
     })
-
     eylets.filter((v,i,a) => {
         if (a.find(v) != i)
             return false;
