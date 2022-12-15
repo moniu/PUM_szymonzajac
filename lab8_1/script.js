@@ -128,7 +128,8 @@ function clickHandler(event) {
     var groups = generateGroups();
     groups.forEach(g => {
         if (isGroupSurrounded(g)) {
-            killGroup(g);
+            if (countEylets(g) < 2)
+                killGroup(g);
         }
     })
 
@@ -239,6 +240,21 @@ function isEyelet(x, y) {
     return emptyNeighbours == 0;
 }
 
+function countEylets(group) {
+    var eylets = [];
+    group.forEach(p => {
+        eylets += getEyletNeighbours(p.x, p.y);
+    })
+
+    eylets.filter((v,i,a) => {
+        if (a.find(v) != i)
+            return false;
+        return true;
+    })
+    return eylets.length;
+
+}
+
 function isGroupSurrounded(group) {
     var isSurrounded = true;
     group.forEach(p => {
@@ -279,4 +295,37 @@ function isPieceSurrounded(x, y) {
         }
     }
     return true;
+}
+
+function getEyletNeighbours(x, y) {
+    var eylets = [];
+    if (x > 0) {
+        if (board[y][x-1] == pieceState.Empty) {
+            if (isEyelet(x-1, y)) {
+                eylets.push({x:x-1, y:y})
+            }
+        }
+    }
+    if (y > 0) {
+        if (board[y-1][x] == pieceState.Empty) {
+            if (isEyelet(x, y-1)) {   
+                eylets.push({x:x, y:y-1})
+            }
+        }
+    }
+    if (x < linesX-1) {
+        if (board[y][x+1] == pieceState.Empty) {
+            if (!isEyelet(x+1, y)) {   
+                eylets.push({x:x+1, y:y})
+            }
+        }
+    }
+    if (y < linesY-1) {
+        if (board[y+1][x] == pieceState.Empty) {
+            if (!isEyelet(x, y+1)) {   
+                eylets.push({x:x, y:y+1})
+            }
+        }
+    }
+    return eylets;
 }
