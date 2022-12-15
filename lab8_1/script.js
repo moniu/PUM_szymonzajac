@@ -241,16 +241,19 @@ function isEyelet(x, y) {
 }
 
 function countEylets(group) {
-    var eylets = [];
+    var eyelets = [];
     group.forEach(p => {
-        eylets += getEyletNeighbours(p.x, p.y);
+        eyelets.push(getEyletNeighbours(p.x, p.y));
     })
-    eylets.filter((v,i,a) => {
-        if (a.find(v) != i)
-            return false;
-        return true;
+    eyelets = eyelets.filter((v,i) => {
+        var unique = true;
+        eyelets.forEach(e => {
+            if (e.x == v.x && e.y == v.y)
+                unique = false;
+        })
+        return unique;
     })
-    return eylets.length;
+    return eyelets.length;
 
 }
 
